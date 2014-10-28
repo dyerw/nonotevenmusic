@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	//"github.com/jmcvetta/neoism"
+	"github.com/jmcvetta/neoism"
 )
 
 type Album struct {
@@ -31,6 +31,18 @@ func PutAlbum(jsonData string) string {
 	}
 
 	// Create a new node in Neo4j DB
+	db, _ := neoism.Connect("http://localhost:7474/db/data")
+
+	res := []struct {
+		N neoism.Node
+	}{}
+
+	cq := neoism.CypherQuery{
+		Statement:  "CREATE (n:Album {name: {name}, year: {year}, recs: {recs}}) RETURN n",
+		Parameters: neoism.Props{"name": a.Name, "year": a.Year, "recs": a.Recs},
+		Result:     res,
+	}
+	db.Cypher(&cq)
 
 	return ""
 }
