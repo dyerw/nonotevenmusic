@@ -31,8 +31,6 @@ func PutAlbum(jsonData string) string {
 	}
 
 	// Create a new node in Neo4j DB
-	db, _ := neoism.Connect("http://localhost:7474/db/data")
-
 	res := []struct {
 		N neoism.Node
 	}{}
@@ -42,7 +40,7 @@ func PutAlbum(jsonData string) string {
 		Parameters: neoism.Props{"name": a.Name, "year": a.Year, "recs": a.Recs},
 		Result:     res,
 	}
-	db.Cypher(&cq)
+	DBConn.Cypher(&cq)
 
 	return ""
 }

@@ -2,8 +2,11 @@ package main
 
 import (
 	"github.com/gorilla/mux"
+	"github.com/jmcvetta/neoism"
 	"net/http"
 )
+
+var DBConn *neoism.Database
 
 func HomeHandler(rw http.ResponseWriter, r *http.Request) {
 	rw.Write([]byte("home"))
@@ -24,6 +27,9 @@ func AlbumHandler(rw http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	// Connect to database
+	DBConn, _ = neoism.Connect("http://localhost:7474/db/data")
+
 	r := mux.NewRouter()
 
 	// Map url routes to functions
