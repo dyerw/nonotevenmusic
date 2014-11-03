@@ -16,7 +16,7 @@ func AlbumHandler(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 
 	json := ""
-	if r.Method == "POST" {
+	if r.Method == "GET" {
 		json = GetAlbum(r.FormValue("data"))
 	}
 	if r.Method == "PUT" {
