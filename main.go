@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/dyerw/nonotevenmusic/api"
 	"github.com/gorilla/mux"
 	"github.com/jmcvetta/neoism"
 	"net/http"
@@ -17,10 +18,10 @@ func AlbumHandler(rw http.ResponseWriter, r *http.Request) {
 
 	json := ""
 	if r.Method == "GET" {
-		json = GetAlbum(r.FormValue("data"))
+		json = api.GetAlbum(r.URL.Query(), DBConn)
 	}
 	if r.Method == "PUT" {
-		json = PutAlbum(r.FormValue("data"))
+		json = api.PutAlbum(r.FormValue("data"), DBConn)
 	}
 
 	rw.Write([]byte(json))

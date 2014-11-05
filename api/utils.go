@@ -1,4 +1,4 @@
-package main
+package api
 
 /*
  * Takes a string representing a field we're selecting on
